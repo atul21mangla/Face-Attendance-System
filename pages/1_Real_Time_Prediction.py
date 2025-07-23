@@ -1,6 +1,6 @@
 import streamlit as st
 import time
-from streamlit_webrtc import webrtc_streamer
+from streamlit_webrtc import webrtc_streamer , RTCConfiguration
 import av
 import face_rec
 
@@ -59,23 +59,17 @@ def video_frame_callback(frame):
         print("Saved logs to Redis DB")
     return av.VideoFrame.from_ndarray(pred_img, format="bgr24")
 
-# ✅ Add TURN/STUN server configuration here
-RTC_CONFIGURATION = {
+RTC_CONFIGURATION = RTCConfiguration({
     "iceServers": [
         {"urls": ["stun:stun.l.google.com:19302"]},
-        {
-            "urls": ["turn:openrelay.metered.ca:80", "turn:openrelay.metered.ca:443"],
-            "username": "openrelayproject",
-            "credential": "openrelayproject"
-        }
+        {"urls": ["stun:stun1.l.google.com:19302"]},
     ]
-}
+})
 
-st.markdown("---")
-st.subheader("📡 Webcam Stream")
-
+# Update your webrtc_streamer
 webrtc_streamer(
-    key="realtimePrediction",
+    key="realtimePrediction", 
     video_frame_callback=video_frame_callback,
-    rtc_configuration=RTC_CONFIGURATION
+    rtc_configuration=RTC_CONFIGURATION,
+    media_stream_constraints={"video": True, "audio": False}
 )
