@@ -1,0 +1,55 @@
+# Byte-compiled / optimized / DLL files
+_pycache_/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+face_attendance_env/
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VSCode settings
+.vscode/
+
+# Virtual environments
+*.env
+*.venv
+*.pyenv
+
+# Log files
+*.log
+
+# Redis dump files
+dump.rdb
+
+# Model and large data files (optional)
+*.onnx
+*.h5
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Streamlit cache
+.streamlit/
+
+# Bash scripts output
+*.sh~
+
+# Requirements files backup
+requirements.txt~
+
+# IDE folders
+.idea/
