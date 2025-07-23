@@ -59,6 +59,23 @@ def video_frame_callback(frame):
         print("Saved logs to Redis DB")
     return av.VideoFrame.from_ndarray(pred_img, format="bgr24")
 
+# ✅ Add TURN/STUN server configuration here
+RTC_CONFIGURATION = {
+    "iceServers": [
+        {"urls": ["stun:stun.l.google.com:19302"]},
+        {
+            "urls": ["turn:openrelay.metered.ca:80", "turn:openrelay.metered.ca:443"],
+            "username": "openrelayproject",
+            "credential": "openrelayproject"
+        }
+    ]
+}
+
 st.markdown("---")
 st.subheader("📡 Webcam Stream")
-webrtc_streamer(key="realtimePrediction", video_frame_callback=video_frame_callback)
+
+webrtc_streamer(
+    key="realtimePrediction",
+    video_frame_callback=video_frame_callback,
+    rtc_configuration=RTC_CONFIGURATION
+)
